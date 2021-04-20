@@ -18,13 +18,11 @@ accessToken = ##
 accessTokenSecret = ##
 
 
-#Create the authentication object
 authenticate = tweepy.OAuthHandler(consumerKey, consumerSecret) 
-    
-# Set the access token and access token secret
+   
 authenticate.set_access_token(accessToken, accessTokenSecret) 
     
-# Creating the API object while passing in auth information
+
 api = tweepy.API(authenticate, wait_on_rate_limit = True)
 
 
@@ -41,7 +39,7 @@ api = tweepy.API(authenticate, wait_on_rate_limit = True)
 
 
 
-#plt.style.use('fivethirtyeight')
+
 
 
 
@@ -97,7 +95,7 @@ def app():
 				
 				def Show_Recent_Tweets(raw_text):
 
-					# Extract 100 tweets from the twitter user
+				
 					posts = api.user_timeline(screen_name=raw_text, count = 100, lang ="en", tweet_mode="extended")
 
 					
@@ -128,9 +126,8 @@ def app():
 					posts = api.user_timeline(screen_name=raw_text, count = 100, lang ="en", tweet_mode="extended")
 
 
-					# Create a dataframe with a column called Tweets
 					df = pd.DataFrame([tweet.full_text for tweet in posts], columns=['Tweets'])
-					# word cloud visualization
+				
 					allWords = ' '.join([twts for twts in df['Tweets']])
 					wordCloud = WordCloud(width=500, height=300, random_state=21, max_font_size=110).generate(allWords)
 					plt.imshow(wordCloud, interpolation="bilinear")
@@ -163,29 +160,28 @@ def app():
 
 
 					
-					# Create a function to clean the tweets
+					
 					def cleanTxt(text):
-					 text = re.sub('@[A-Za-z0–9]+', '', text) #Removing @mentions
-					 text = re.sub('#', '', text) # Removing '#' hash tag
-					 text = re.sub('RT[\s]+', '', text) # Removing RT
-					 text = re.sub('https?:\/\/\S+', '', text) # Removing hyperlink
+					 text = re.sub('@[A-Za-z0–9]+', '', text) 
+					 text = re.sub('#', '', text) 
+					 text = re.sub('RT[\s]+', '', text) 
+					 text = re.sub('https?:\/\/\S+', '', text) 
 					 
 					 return text
 
 
-					# Clean the tweets
 					df['Tweets'] = df['Tweets'].apply(cleanTxt)
 
 
 					def getSubjectivity(text):
 					   return TextBlob(text).sentiment.subjectivity
 
-					# Create a function to get the polarity
+					
 					def getPolarity(text):
 					   return  TextBlob(text).sentiment.polarity
 
 
-					# Create two new columns 'Subjectivity' & 'Polarity'
+					
 					df['Subjectivity'] = df['Tweets'].apply(getSubjectivity)
 					df['Polarity'] = df['Tweets'].apply(getPolarity)
 
@@ -244,10 +240,10 @@ def app():
 			df = pd.DataFrame([tweet.full_text for tweet in posts], columns=['Tweets'])
 
 			def cleanTxt(text):
-				text = re.sub('@[A-Za-z0–9]+', '', text) #Removing @mentions
-				text = re.sub('#', '', text) # Removing '#' hash tag
-				text = re.sub('RT[\s]+', '', text) # Removing RT
-				text = re.sub('https?:\/\/\S+', '', text) # Removing hyperlink
+				text = re.sub('@[A-Za-z0–9]+', '', text) 
+				text = re.sub('#', '', text) 
+				text = re.sub('RT[\s]+', '', text)
+				text = re.sub('https?:\/\/\S+', '', text) 
 				return text
 
 			# Clean the tweets
@@ -257,12 +253,12 @@ def app():
 			def getSubjectivity(text):
 				return TextBlob(text).sentiment.subjectivity
 
-						# Create a function to get the polarity
+						
 			def getPolarity(text):
 				return  TextBlob(text).sentiment.polarity
 
 
-						# Create two new columns 'Subjectivity' & 'Polarity'
+						
 			df['Subjectivity'] = df['Tweets'].apply(getSubjectivity)
 			df['Polarity'] = df['Tweets'].apply(getPolarity)
 
