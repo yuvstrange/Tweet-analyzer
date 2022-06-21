@@ -12,10 +12,10 @@ import seaborn as sns
 
 
 
-consumerKey = 'rnKuhQ5AoIJITOAdVLMHBQZPM'
-consumerSecret = 'liHXGOZNoVDbaXMnVaoIaJilOsG8oizUdy1ddJpHqgziKJj6Ov'
-accessToken = '1343902891220684805-KBUviao3NWDtG0e4xXOEc6uTODBWsL'
-accessTokenSecret = 'rg6DO8FrAtLnydE48IQP8eLfckt6kpFD1Wnf0Yfu4KFUI'
+consumerKey = ''
+consumerSecret = ''
+accessToken = ''
+accessTokenSecret = ''
 
 
 authenticate = tweepy.OAuthHandler(consumerKey, consumerSecret) 
